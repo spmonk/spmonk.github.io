@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>计算机网络再入门 | Spmonk&#39;s site</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="net," />
+  
+
+  <meta name="description" content="计算机网络再入门前一段时间，在android的开发中，本着组件化的思想，对应用的网络请求进行了组件封装，采用了Retrofit+OkHttp的组合，在开发的过程中遇到了不少问题，有设计问题，也有技术问题，这都是后话了，在后面的文章再来总结。在这中间，我深深的感觉对计算机网络的知识的不熟练，或者说是对理论在实际开发中的应用的陌生，并没有做到了然与胸，所以说需要再次入门啊！！！
+那为什么说是在入门呢，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络再入门">
+<meta property="og:url" content="http://yoursite.com/2016/10/07/计算机网络再入门/index.html">
+<meta property="og:site_name" content="Spmonk's site">
+<meta property="og:description" content="计算机网络再入门前一段时间，在android的开发中，本着组件化的思想，对应用的网络请求进行了组件封装，采用了Retrofit+OkHttp的组合，在开发的过程中遇到了不少问题，有设计问题，也有技术问题，这都是后话了，在后面的文章再来总结。在这中间，我深深的感觉对计算机网络的知识的不熟练，或者说是对理论在实际开发中的应用的陌生，并没有做到了然与胸，所以说需要再次入门啊！！！
+那为什么说是在入门呢，">
+<meta property="og:image" content="http://yoursite.com/image/层次图.png">
+<meta property="og:image" content="http://yoursite.com/image/数据封装.png">
+<meta property="og:updated_time" content="2016-10-08T06:08:02.008Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="计算机网络再入门">
+<meta name="twitter:description" content="计算机网络再入门前一段时间，在android的开发中，本着组件化的思想，对应用的网络请求进行了组件封装，采用了Retrofit+OkHttp的组合，在开发的过程中遇到了不少问题，有设计问题，也有技术问题，这都是后话了，在后面的文章再来总结。在这中间，我深深的感觉对计算机网络的知识的不熟练，或者说是对理论在实际开发中的应用的陌生，并没有做到了然与胸，所以说需要再次入门啊！！！
+那为什么说是在入门呢，">
+<meta name="twitter:image" content="http://yoursite.com/image/层次图.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=028c63b1" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">Posts List</strong>
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#计算机网络再入门"><span class="toc-text">计算机网络再入门</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-计算机网络再入门" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">计算机网络再入门</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2016.10.07</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>spmonk</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/category/net/">net</a>
+  </span>
+
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="http://spmonk.github.io//2016/10/07/计算机网络再入门/#disqus_thread"></a>
+        </span>
+      
+
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h4 id="计算机网络再入门"><a href="#计算机网络再入门" class="headerlink" title="计算机网络再入门"></a>计算机网络再入门</h4><p>前一段时间，在android的开发中，本着组件化的思想，对应用的网络请求进行了组件封装，采用了Retrofit+OkHttp的组合，在开发的过程中遇到了不少问题，有设计问题，也有技术问题，这都是后话了，在后面的文章再来总结。在这中间，我深深的感觉对计算机网络的知识的不熟练，或者说是对理论在实际开发中的应用的陌生，并没有做到了然与胸，所以说需要再次入门啊！！！</p>
+<p>那为什么说是在入门呢，说来惭愧，计算机网络这门课，在本科阶段和研究生阶段都学了一边(PS: 研究生阶段的课没去上，但听说很水，考试还不如本科的难度)，但当真正在开发中的时候却发现还是太嫩了，所以不得不喷一下现阶段的大学教育，还是缺少实践啊(其实不是自己太懒，没人领入门啊)。没有实践，强制搞理论，特别对于没有基础的那真是一个痛苦啊(本科阶段的写照)，现在想想，你好歹打开浏览器，按个F12给我看看网络请求时的样子也好啊，然而并没有，这就比较伤了。ちくしょう。</p>
+<p>好了，言归正传。说到计算机网络，就想到五层模型。不得不说，五层模型这种分层架构分离了职责，每一层所负责的任务不同，降低了网络的复杂度，并使得整体的结构变得清晰。我觉得计算机的很多理论知识和体系都是来源于生产生活中，对生产生活中的行为进行总结，抽象建模后进行模式剥离，并上升到理论的层面。同样的，说到计算机网络，本质上就是进行资源的传送，这和送快递其实没有本质上的区别。</p>
+<p>下面是对五层模型和快递的类比。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">理论抽象</th>
+<th style="text-align:center">现实生活</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">应用层协议：主要规定了客户端和服务器端的通信格式，不涉及数据的具体传输事项。</td>
+<td style="text-align:center">快递单：指明了寄件人和收件人之间的通信根式，而不管快递是怎么送达到收件人的手中的。</td>
+</tr>
+<tr>
+<td style="text-align:center">运输层协议：主要解决如何进行可靠的传递数据包，使在网络的另一端可以完整，有序的接受到所有的数据包。</td>
+<td style="text-align:center">快递公司：对寄件人的包裹进行分拣，整理，归类，保证所有的包裹可以完好，全部交到收件人手中。</td>
+</tr>
+<tr>
+<td style="text-align:center">网络层协议： 主要解决网络路由和寻址问题</td>
+<td style="text-align:center">物流公司：对运输线路进行查找和规划，找到可以到达目的地合适的路线</td>
+</tr>
+<tr>
+<td style="text-align:center">链路层协议：主要解决将网络层报文封装成帧，透明传输和差错校验</td>
+<td style="text-align:center">汽车公司 ：对快递进行分车装载，而不管快递的内容和快递公司是哪家，同时保证快递不丢失</td>
+</tr>
+<tr>
+<td style="text-align:center">物理层协议：主要确保原始的数据(0,1)可以在各种物理媒介上进行传输</td>
+<td style="text-align:center">交通网 ：运输的各种基础设施，包括公路，铁路，航空，海路，承载实际的货物运输</td>
+</tr>
+</tbody>
+</table>
+<p>不同层的上有不同的协议，同时依赖着不同的底层协议。协议的层次关系可以表示为  :</p>
+<p> <img src="/image/层次图.png" alt="层次图"></p>
+<p>数据一般由应用层产生。每一层协议将上层协议的封装的数据作为原始数据，再加上本层协议的数据控制头后，再传给下一层继续传输，直到到达物理层。不同层的数据封装过程可以表示为：</p>
+<p> <img src="/image/数据封装.png" alt="数据封装"></p>
+
+    
+  </div>
+</article>
+
+</div>
+
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">Close</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'http://yoursite.com/2016/10/07/计算机网络再入门/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//forsigner.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
