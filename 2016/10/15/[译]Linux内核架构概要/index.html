@@ -15,16 +15,18 @@
     <meta name="keywords" content="linux,architecture," />
   
 
-  <meta name="description">
+  <meta name="description" content="概要这篇文章描述的是Linux内核概念上的软件架构。这里说的架构是和内核中高伸缩性的子系统相关，和特殊的程序或变量无关。这样一个架构概要的目的之一是为了对Linux的开发人员和架构师能够在脑中形成一个模型。这个模型可能并不能很好的反应实际的架构，但它能提供一个有效的方式来思考整体的架构。这个模型对于大部分入门水平的开发人员来说是非常有帮助的，但同时对于有经验的开发者来说也是保持连续和准确的系统词汇">
 <meta property="og:type" content="article">
 <meta property="og:title" content="(译)Linux内核架构概要">
 <meta property="og:url" content="http://yoursite.com/2016/10/15/[译]Linux内核架构概要/index.html">
 <meta property="og:site_name" content="Spmonk's site">
-<meta property="og:description">
-<meta property="og:updated_time" content="2016-10-16T06:25:12.038Z">
+<meta property="og:description" content="概要这篇文章描述的是Linux内核概念上的软件架构。这里说的架构是和内核中高伸缩性的子系统相关，和特殊的程序或变量无关。这样一个架构概要的目的之一是为了对Linux的开发人员和架构师能够在脑中形成一个模型。这个模型可能并不能很好的反应实际的架构，但它能提供一个有效的方式来思考整体的架构。这个模型对于大部分入门水平的开发人员来说是非常有帮助的，但同时对于有经验的开发者来说也是保持连续和准确的系统词汇">
+<meta property="og:image" content="http://yoursite.com/image/Linux分解子系统.png">
+<meta property="og:updated_time" content="2016-10-18T06:22:20.091Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="(译)Linux内核架构概要">
-<meta name="twitter:description">
+<meta name="twitter:description" content="概要这篇文章描述的是Linux内核概念上的软件架构。这里说的架构是和内核中高伸缩性的子系统相关，和特殊的程序或变量无关。这样一个架构概要的目的之一是为了对Linux的开发人员和架构师能够在脑中形成一个模型。这个模型可能并不能很好的反应实际的架构，但它能提供一个有效的方式来思考整体的架构。这个模型对于大部分入门水平的开发人员来说是非常有帮助的，但同时对于有经验的开发者来说也是保持连续和准确的系统词汇">
+<meta name="twitter:image" content="http://yoursite.com/image/Linux分解子系统.png">
 
   
 
@@ -119,6 +121,11 @@
 </div>
 
 
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">Posts List</strong>
+    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#概要"><span class="toc-text">概要</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#内容"><span class="toc-text">内容</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#系统架构"><span class="toc-text">系统架构</span></a></li></ol>
+  </div>
+
 
 
 <div class="content content-post CENTER">
@@ -159,7 +166,62 @@
 
   <div class="article-content">
     
-      
+      <h5 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h5><p>这篇文章描述的是Linux内核概念上的软件架构。这里说的架构是和内核中高伸缩性的子系统相关，和特殊的程序或变量无关。这样一个架构概要的目的之一是为了对Linux的开发人员和架构师能够在脑中形成一个模型。这个模型可能并不能很好的反应实际的架构，但它能提供一个有效的方式来思考整体的架构。这个模型对于大部分入门水平的开发人员来说是非常有帮助的，但同时对于有经验的开发者来说也是保持连续和准确的系统词汇的有效方式。</p>
+<p>这架构的出现是对现有的Linux实现的结果；使用的主要信息源是文档和源码。不幸的是，并没有对Linux的开发人员的采访来提取系统的架构。</p>
+<p>Linux内核有五个主要的子系统组成，通过程序调用(<code>procedure call</code>)来进行通信。在五个子系统中，四个子系统将从模块互联的层面来进行讨论。始终将考虑到特殊子系统和linux系统全局的关系。</p>
+<p>这样的Linux内核架构是Linux成功被许多使用者采用的原因之一。特别地，Linux内核架构被设计成支持大量地志愿开发人员进行开发。而且最可能需要进行功能增加的子系统被构造成了容易扩展。这是整个系统成功的两个主要因素。</p>
+<h5 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h5><ol>
+<li><p>介绍</p>
+<p>1.1 目的</p>
+<p>1.2 文章的挑战</p>
+<p>1.3 组织结构</p>
+</li>
+<li><p>系统架构</p>
+<p>2.1 系统概览</p>
+<p>2.2 内核用途</p>
+<p>2.3 内核架构概览</p>
+<p>2.4 多开发支持</p>
+<p>2.5 系统数据结构</p>
+</li>
+<li><p>子系统架构</p>
+<p>3.1 进程调度器架构 — Process Scheduler</p>
+<p>3.2 内存管理器架构 — Memory Manager</p>
+<p>3.3 虚拟文件系统架构 — Virtual FIle System</p>
+<p>3.4 网络接口架构 — Network Interface</p>
+<p>3.5 进程间通信架构 — Inter-Process Communication</p>
+</li>
+<li><p>结论</p>
+</li>
+</ol>
+<hr>
+<h5 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h5><ul>
+<li>目的</li>
+</ul>
+<p>这篇文章的目的是提出Linux内核架构的概要。这被<code>Soni</code>描述为了<code>conceptual architecture</code>。通过提取高层次的设计，这个架构对于入门的开发者是非常有帮助的，因为在理解程序作用的位置之前需要了解高层次的架构，而架构概要则是形成术语的有效方式[<code>system vocabulary</code>]，而这些术语通常在有经验的开发者和系统设计者中共同使用。这篇架构性的描述可能并不能很全面的反应真实实现的架构，但能在思想上提供有用的模型来分享。理想的情况下，架构的概要应该在系统实现前就完成，并随着系统的持续性进行更新。</p>
+<ul>
+<li>文章的挑战</li>
+</ul>
+<p>这个发表在某种意义上是不正常的，在与架构概要通常是在系统完工时就应该形成。因为文章的作者并没有参与Linux系统的设计与实现，这篇文章的是对2.0.27内核源码进行逆向工程和文档的结果。用到了少量的架构性的描述，但这些描述也是基于已存在的系统实现。通过已存在的系统实现推到出架构概要，所以文章中出现一些实现细节来作为架构概要。</p>
+<p>除此之外，文章中抽取信息的机制忽略了最好的信息来源 — 系统的架构师和开发者才是活生生的知识。为了系统架构的合理概要，应该要对这些个体进行采访。只有以这种方式才能描述准确的系统架构模型。</p>
+<ul>
+<li>组织结构</li>
+</ul>
+<p>接下来的部分完整的描述整体的目标和Linux内核架构。接着，每个独立的子系统以模块进行阐述，并对子系统中的模块间的关系进行讨论。最后将讨论Linux内核架构对系统的实现和系统的整体成功是如何发挥作用的。</p>
+<hr>
+<h5 id="系统架构"><a href="#系统架构" class="headerlink" title="系统架构"></a>系统架构</h5><ul>
+<li>系统概览</li>
+</ul>
+<p>孤立的Linux内核是无法起作用的；只有在一个更大的系统中，作为一个整体中的一部分才能发挥作用。因此，在整个系统上下文中讨论内核才是有意义的。图2.1展示了整个Linux操作系统的分解。 <img src="/image/Linux分解子系统.png" alt="Linux分解子系统"></p>
+<p>Linux操作系统由四个主要的子系统组成：</p>
+<ol>
+<li>用户应用程序 <code>User Applications</code> – 系统使用的用户应用集通常根据使用的电脑系统的不同而不同，但通常情况下包括word处理应用和浏览器。</li>
+<li>O/S服务  O/S Services – 系统服务通常被当作操作系统的一部分(比如windowing system，command shell)，还有对内核的编程接口也包括在这个子系统中。</li>
+<li>Linux内核 Linux Kernel – 是本篇文章主要的关注点； 内核抽象和调控对硬件资源的访问，包括CPU</li>
+<li>硬件控制器 Hardware Controllers – 这个子系统由linux安装中所有可能的物理驱动组成；比如，CPU，内存，硬盘，网络硬件等等。</li>
+</ol>
+<p>这个分解遵循了分层架构；每个子系统层只和直接相邻的子系统通信。此外，子系统间的依赖关系是从上到下：图上层的子系统依赖下层的子系统，但下层的子系统不依赖上层的子系统。</p>
+<p>因为文章的主要关注点在Linux内核，这里将会完全的忽略用户应用程序子系统，只考虑硬件和O/S 服务子系统和Linux内核子系统的交界。</p>
+
     
   </div>
 </article>
