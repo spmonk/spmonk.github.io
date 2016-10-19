@@ -22,9 +22,9 @@
 <meta property="og:site_name" content="Spmonk's site">
 <meta property="og:description" content="概要这篇文章描述的是Linux内核概念上的软件架构。这里说的架构是和内核中高伸缩性的子系统相关，和特殊的程序或变量无关。这样一个架构概要的目的之一是为了对Linux的开发人员和架构师能够在脑中形成一个模型。这个模型可能并不能很好的反应实际的架构，但它能提供一个有效的方式来思考整体的架构。这个模型对于大部分入门水平的开发人员来说是非常有帮助的，但同时对于有经验的开发者来说也是保持连续和准确的系统词汇">
 <meta property="og:image" content="http://yoursite.com/image/Linux分解子系统.png">
-<meta property="og:image" content="http://yoursite.com/image/ ![Linux开发者档案](D:\06_codes\blog\spmonk.github.io\source\image\Linux开发者档案.png">
+<meta property="og:image" content="http://yoursite.com/image/Linux子系统概览.png">
 <meta property="og:image" content="http://yoursite.com/image/Linux开发者档案.png">
-<meta property="og:updated_time" content="2016-10-19T06:39:49.727Z">
+<meta property="og:updated_time" content="2016-10-19T06:42:10.090Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="(译)Linux内核架构概要">
 <meta name="twitter:description" content="概要这篇文章描述的是Linux内核概念上的软件架构。这里说的架构是和内核中高伸缩性的子系统相关，和特殊的程序或变量无关。这样一个架构概要的目的之一是为了对Linux的开发人员和架构师能够在脑中形成一个模型。这个模型可能并不能很好的反应实际的架构，但它能提供一个有效的方式来思考整体的架构。这个模型对于大部分入门水平的开发人员来说是非常有帮助的，但同时对于有经验的开发者来说也是保持连续和准确的系统词汇">
@@ -239,7 +239,7 @@
 <li>进程间通信<code>Inter-Process Communication</code>，通过多种机制来支持在单一的Linux系统中进程间通信。</li>
 </ol>
 <p>图2.2展示了对Linux内核高层次的分解，图中的线从从属的子系统画向依赖的子系统。</p>
-<p>  <img src="/image/ ![Linux开发者档案](D:\06_codes\blog\spmonk.github.io\source\image\Linux开发者档案.png" alt="Linux子系统概览">Linux子系统概览.png)</p>
+<p>  <img src="/image/Linux子系统概览.png" alt="Linux子系统概览"></p>
 <p>图中突出了最中心的子系统是进程调度器：所有的其他子系统都要依赖进程调度器，这是因为所有的子系统需要挂起和恢复进程。通常一个子系统需要等待一个硬件操作完成时会挂起一个进程，当操作完成时会恢复进程。比如，当一个进程试图通过网络发送一条消息，在消息发送后（或者消息发送失败），网络接口在返回状态码表示操作成功或失败后会恢复进程。其他子系统都因为类似的原因而需要依赖进程调度器。</p>
 <p>其他依赖在某种程度上是比较不明显的，但相当重要：</p>
 <ul>
