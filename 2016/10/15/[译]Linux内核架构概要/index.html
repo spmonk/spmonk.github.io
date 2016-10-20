@@ -7,7 +7,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>(译)Linux内核架构概要 | Spmonk&#39;s site</title>
+  <title>【译】Linux内核架构概要 | Spmonk&#39;s site</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -17,16 +17,17 @@
 
   <meta name="description" content="概要这篇文章描述的是Linux内核概念上的软件架构。这里说的架构是和内核中高伸缩性的子系统相关，和特殊的程序或变量无关。这样一个架构概要的目的之一是为了对Linux的开发人员和架构师能够在脑中形成一个模型。这个模型可能并不能很好的反应实际的架构，但它能提供一个有效的方式来思考整体的架构。这个模型对于大部分入门水平的开发人员来说是非常有帮助的，但同时对于有经验的开发者来说也是保持连续和准确的系统词汇">
 <meta property="og:type" content="article">
-<meta property="og:title" content="(译)Linux内核架构概要">
+<meta property="og:title" content="【译】Linux内核架构概要">
 <meta property="og:url" content="http://yoursite.com/2016/10/15/[译]Linux内核架构概要/index.html">
 <meta property="og:site_name" content="Spmonk's site">
 <meta property="og:description" content="概要这篇文章描述的是Linux内核概念上的软件架构。这里说的架构是和内核中高伸缩性的子系统相关，和特殊的程序或变量无关。这样一个架构概要的目的之一是为了对Linux的开发人员和架构师能够在脑中形成一个模型。这个模型可能并不能很好的反应实际的架构，但它能提供一个有效的方式来思考整体的架构。这个模型对于大部分入门水平的开发人员来说是非常有帮助的，但同时对于有经验的开发者来说也是保持连续和准确的系统词汇">
 <meta property="og:image" content="http://yoursite.com/image/Linux分解子系统.png">
 <meta property="og:image" content="http://yoursite.com/image/Linux子系统概览.png">
 <meta property="og:image" content="http://yoursite.com/image/Linux开发者档案.png">
-<meta property="og:updated_time" content="2016-10-19T06:44:00.236Z">
+<meta property="og:image" content="http://yoursite.com/image/上下文中的进程调度器.png">
+<meta property="og:updated_time" content="2016-10-20T06:21:04.429Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="(译)Linux内核架构概要">
+<meta name="twitter:title" content="【译】Linux内核架构概要">
 <meta name="twitter:description" content="概要这篇文章描述的是Linux内核概念上的软件架构。这里说的架构是和内核中高伸缩性的子系统相关，和特殊的程序或变量无关。这样一个架构概要的目的之一是为了对Linux的开发人员和架构师能够在脑中形成一个模型。这个模型可能并不能很好的反应实际的架构，但它能提供一个有效的方式来思考整体的架构。这个模型对于大部分入门水平的开发人员来说是非常有帮助的，但同时对于有经验的开发者来说也是保持连续和准确的系统词汇">
 <meta name="twitter:image" content="http://yoursite.com/image/Linux分解子系统.png">
 
@@ -125,7 +126,7 @@
 
   <div id="toc" class="toc-article">
     <strong class="toc-title">Posts List</strong>
-    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#概要"><span class="toc-text">概要</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#内容"><span class="toc-text">内容</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#系统架构"><span class="toc-text">系统架构</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#概要"><span class="toc-text">概要</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#内容"><span class="toc-text">内容</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#系统架构"><span class="toc-text">系统架构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#子系统架构"><span class="toc-text">子系统架构</span></a></li></ol>
   </div>
 
 
@@ -133,7 +134,7 @@
 <div class="content content-post CENTER">
    <article id="post-[译]Linux内核架构概要" class="article article-type-post" itemprop="blogPost">
   <header class="article-header">
-    <h1 class="post-title">(译)Linux内核架构概要</h1>
+    <h1 class="post-title">【译】Linux内核架构概要</h1>
 
     <div class="article-meta">
       <span>
@@ -258,6 +259,42 @@
 <p><img src="/image/Linux开发者档案.png" alt="Linux开发者档案"></p>
 <p>图2.3展示了参与了Linux内核开发的大部分开发者，以及已经实现的区域。少部分开发者参与修改内核的多个部分。为了清晰起见，图中没有包含这些开发人员。比如，Linus Torvalds是Linux内核子系统的原始实现者，不过随后的开发有其他开发者完成。这个图并没有考虑准确因为在开发内核期间开发者的署名并没有很好的维护，但也给出了开发人员努力的领域。</p>
 <p>这图证实了早前表述内核的高弹性架构。非常有趣的去注意到，少量开发者会涉及多个子系统，主要发生在存在子系统依赖的地方。系统结构通常反应了开发结构。大部分的开发者的工作集中在硬件设备驱动，逻辑文件模块，网络设备驱动，网络协议模块。所以这四个模块是kernel中设计最为可扩展的部分。</p>
+<ul>
+<li>系统数据结构</li>
+</ul>
+<ol>
+<li>Task List：进程调度器为每个活动的进程维护一个数据块。这些数据块被存储在被称为task list的链表中；进程调度器通常维护一个current的指针表示当前活动的进程。</li>
+<li>Memory Map： 内存管理器存储着每个进程虚拟地址与物理地址的映射。同时也存储着如何取回和替换特定的页所需要的额外信息。这个信息被存储在这个进程的task list中的内存映射数据结构中。</li>
+<li>I-nodes：虚拟文件系统使用index-node(i-nodes)来代表逻辑文件系统中的文件。i-node数据结构存储着文件块的数量和物理设备地址的映射关系。如果两个进程同时打开同一个文件时，可以跨进程共享I-node数据结构，通过两个task数据块指向同一个i-node来进行共享。</li>
+<li>Data Connection：所有的数据结构的根源都在进程调度器的task list中。系统中的每一个进程都有一个数据结构(task data structure)，包括着指向它的内存映射信息的指针，指向所有打开文件的i-nodes的指针，指向代表当前进程和其他task有联系的开放网络连接的数据结构。</li>
+</ol>
+<hr>
+<h5 id="子系统架构"><a href="#子系统架构" class="headerlink" title="子系统架构"></a>子系统架构</h5><ol>
+<li><p>进程调度器架构</p>
+<ul>
+<li><p>目标</p>
+<p>进程调度器是Linux内核中最重要的子系统。它的目的是控制计算机的CPU访问控制。这不仅仅包括用户进程的访问，也包括其他内核子系统的访问。</p>
+</li>
+<li><p>模块</p>
+<p>进程调度器主要被分为四个部分：</p>
+<ol>
+<li>调度策略模块负责判断哪个进程可以访问CPU，这个策略在设计上对于进程访问CPU是公平的。</li>
+<li>架构相关模块通过设计成通用接口来抽取任何计算机架构的细节。这些模块负责和CPU通信来进行进程的挂起和恢复。这些操作包括了知道有哪些寄存器，每个进程需要保留的状态信息，然后执行代码来进行挂起和恢复操作。</li>
+<li>架构无关模块和调度策略模块进行通信来决定下一个执行的进程，然后调用架构相关模块来恢复相应的进程。此外这个模块会调用内存管理器来确保恢复的进程的内存也被恢复。</li>
+<li>系统调用接口模块允许用户进程访问被内核暴露出来的资源。这样就减少了用户进程对内核的依赖，只用依赖定义良好并且很少改变的接口，而不用管其他内核模块实现的变化。</li>
+</ol>
+<p><img src="/image/上下文中的进程调度器.png" alt="上下文中的进程调度器"></p>
+</li>
+<li><p>数据结构</p>
+<p>进程调度器维护着task list的数据结构，一个实体对应一个活跃的进程。这个数据结构包含着足够的信息来挂起和恢复进程，同时包含着额外的核对和状态信息。这个数据结构可以通过内核层得到。</p>
+</li>
+<li><p>依赖，数据流，控制流</p>
+<p>就如前面提及，进程调度器调用了内存管理器子系统；因为这个原因，进程调度器子系统依赖内存管理器子系统。此外，当等待硬件请求完成时，其他内核子系统需要依赖进程调度器来挂起和恢复进程。这些依赖表现为功能调用和访问共享的task list数据结构。所有内核子系统读写代表当前任务的数据结构，形成了和进程调度器的双向数据流。</p>
+<p>除了在内核层内部的数据和控制流，O/S 服务层为用户进程提供了用于注册定时器的接口。这就形成了进程调度器对用户进程的控制流。在通常情况下恢复睡眠的进程不被认为形成了控制流因为用户进程无法检测这个操作。最后，进程调度器和CPU通信来挂起和恢复进程；这形成了数据流和控制流。CPU负责中断当前执行进程并允许内核调度另一个进程。</p>
+</li>
+</ul>
+</li>
+</ol>
 
     
   </div>
