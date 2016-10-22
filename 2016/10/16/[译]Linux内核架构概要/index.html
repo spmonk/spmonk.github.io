@@ -27,7 +27,8 @@
 <meta property="og:image" content="http://yoursite.com/image/上下文中的进程调度器.png">
 <meta property="og:image" content="http://yoursite.com/image/上下文中的内存管理器.png">
 <meta property="og:image" content="http://yoursite.com/image/上下文中的虚拟文件系统.png">
-<meta property="og:updated_time" content="2016-10-22T13:19:47.325Z">
+<meta property="og:image" content="http://yoursite.com/image/上下文中的网络接口子系统.png">
+<meta property="og:updated_time" content="2016-10-22T16:07:01.714Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【译】Linux内核架构概要">
 <meta name="twitter:description" content="概要这篇文章描述的是Linux内核概念上的软件架构。这里说的架构是和内核中高伸缩性的子系统相关，和特殊的程序或变量无关。这样一个架构概要的目的之一是为了对Linux的开发人员和架构师能够在脑中形成一个模型。这个模型可能并不能很好的反应实际的架构，但它能提供一个有效的方式来思考整体的架构。这个模型对于大部分入门水平的开发人员来说是非常有帮助的，但同时对于有经验的开发者来说也是保持连续和准确的系统词汇">
@@ -128,7 +129,7 @@
 
   <div id="toc" class="toc-article">
     <strong class="toc-title">Posts List</strong>
-    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#概要"><span class="toc-text">概要</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#内容"><span class="toc-text">内容</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#系统架构"><span class="toc-text">系统架构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#子系统架构"><span class="toc-text">子系统架构</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#概要"><span class="toc-text">概要</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#内容"><span class="toc-text">内容</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#系统架构"><span class="toc-text">系统架构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#子系统架构"><span class="toc-text">子系统架构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
   </div>
 
 
@@ -344,7 +345,38 @@
 </li>
 </ul>
 </li>
+<li><p>网络接口模块</p>
+<ul>
+<li><p>目标</p>
+<p>网络子系统允许Linux系统通过网络和其他系统进行连接。有大量的硬件设备需要支持，大量的网络协议可以使用。网络子系统抽象了设备和协议的实现细节使得用户进程和其他的内核子系统可以访问网络而不需要知道什么物理设备和协议被使用。</p>
+</li>
+<li><p>模块</p>
+<ol>
+<li>网络设备驱动和硬件设备进行通信。对每一个硬件设备都有一个设备驱动模块</li>
+<li>设备无法接口模块对所有的硬件设备提供了一致的视图，所以子系统中更高层次不需要知道正在使用的确切的硬件设备。</li>
+<li>网络协议模块负责实现每一个可能的网络传输协议。</li>
+<li>协议无关接口模块提供了与硬件设备和网络协议无法的接口。这是被其他内核子系统来访问网络而不需要依赖某个特定的协议或硬件的接口。</li>
+<li>最后，系统调用接口限制用户进程可以访问的程序。</li>
 </ol>
+<p><img src="/image/上下文中的网络接口子系统.png" alt="上下文中的网络接口子系统"></p>
+</li>
+<li><p>数据表示</p>
+<p>每个网络对象被表示为一个socket。Sockets使用和i-nodes同样的方式和进程进行关联；进程间可以通过让task data数据结构指向相同的socket 数据结构来共享sockets。</p>
+</li>
+<li><p>数据流，控制流，依赖</p>
+<p>网络子系统使用进程调度管理器来挂起和恢复进程当等待硬件完成操作。此外，网络子系统支持了虚拟文件系统通过实现了NFS的逻辑文件系统导致了虚拟文件系统依赖网络接口并形成了数据和控制流。</p>
+</li>
+</ul>
+</li>
+<li><p>进程间通信架构</p>
+<p>进程间通信子系统架构因为不想其他子系统那样有趣而简化忽略了。</p>
+</li>
+</ol>
+<hr>
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><p>Linux内核是整个Linux系统架构的一层。内核从概要上可以分为五个主要的子系统：进程调度器，内存管理器，虚拟文件系统，网络接口，进程间通信接口，这些子系统通过功能调用和共享数据结构来进行交互。</p>
+<p>从最高的层次来说，Linux内核的架构风格与Garlan和Shaw的数据抽象风格非常接近。内核由子系统组成，而子系统维护内部表现的一致性通过提供特定的程序接口。正如每个子系统被阐述的一样，我们可以看到架构风格和层级风格十分相似。每个子系统由模块组成并只和相邻的层进行通信。</p>
+<p>linux内核架构的概要已经证明了它的成功；这个成功的必要因素是开发者组织的准备，和系统可扩展性的准备。Linux内核架构要求支持大量独立志愿开发者。这个要求表明对于大部分的开发要求系统分离  – 硬件设备驱动和文件以及网络协议 – 要以一种可扩展的方式实现。Linux通过使用数据抽象技术来使系统架构接近可扩展：每个硬件设备驱动被作为一个支持相同接口的独立模块。以这种方式，一个独立的开发者可以加入性的设备驱动，并且和其他的Linux内核开发者有最小的交叉。被大量志愿开发者实现的Linux内核的成功证明了这个策略的正确性。</p>
+<p>Linux内核另一个重要的扩展是支持更多的硬件平台。通过分离所有硬件相关代码到每个子系统的不同的模块，系统的架构实现了这样的扩展性。以这种方式，一个小团队的开发者可以对一个新的硬件架构实现Linux内核的端口，只要重新实现内核中机器相关的部分就行了。</p>
 
     
   </div>
