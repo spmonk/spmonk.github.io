@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>HTTP协议再入门 | Spmonk&#39;s site</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="HTTP," />
+  
+
+  <meta name="description" content="HTTP协议再入门​       在android开发中，对应用的网络访问层做了封装，让网络访问层脱离了业务，可以在不同的应用项目中重用，在这个过程中不可避免的需要接触到HTTP协议。其实以前写前端的时候也接触到了HTTP协议的使用。不得不说，前人在这方面做了大量的工作，无论是android的Retrofit+OkHTTP或者Apache的HttpClient又或者最原始的JDK自带的URLCon">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP协议再入门">
+<meta property="og:url" content="http://yoursite.com/2016/10/08/HTTP协议再入门/index.html">
+<meta property="og:site_name" content="Spmonk's site">
+<meta property="og:description" content="HTTP协议再入门​       在android开发中，对应用的网络访问层做了封装，让网络访问层脱离了业务，可以在不同的应用项目中重用，在这个过程中不可避免的需要接触到HTTP协议。其实以前写前端的时候也接触到了HTTP协议的使用。不得不说，前人在这方面做了大量的工作，无论是android的Retrofit+OkHTTP或者Apache的HttpClient又或者最原始的JDK自带的URLCon">
+<meta property="og:image" content="http://yoursite.com/image/HTTP事务流程.png">
+<meta property="og:image" content="http://yoursite.com/image/URI_URL_URN.png">
+<meta property="og:image" content="http://yoursite.com/D:\06_codes\blog\spmonk.github.io\source\image\HTTP报文结构.png">
+<meta property="og:updated_time" content="2016-10-08T06:16:11.365Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTTP协议再入门">
+<meta name="twitter:description" content="HTTP协议再入门​       在android开发中，对应用的网络访问层做了封装，让网络访问层脱离了业务，可以在不同的应用项目中重用，在这个过程中不可避免的需要接触到HTTP协议。其实以前写前端的时候也接触到了HTTP协议的使用。不得不说，前人在这方面做了大量的工作，无论是android的Retrofit+OkHTTP或者Apache的HttpClient又或者最原始的JDK自带的URLCon">
+<meta name="twitter:image" content="http://yoursite.com/image/HTTP事务流程.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=028c63b1" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">Posts List</strong>
+    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#HTTP协议再入门"><span class="toc-text">HTTP协议再入门</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#流程分析"><span class="toc-text">流程分析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#URI"><span class="toc-text">URI</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#HTTP演进"><span class="toc-text">HTTP演进</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#HTTP报文"><span class="toc-text">HTTP报文</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#HTTP进阶"><span class="toc-text">HTTP进阶</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-HTTP协议再入门" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">HTTP协议再入门</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2016.10.08</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>spmonk</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/category/net/">net</a>
+  </span>
+
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="http://spmonk.github.io//2016/10/08/HTTP协议再入门/#disqus_thread"></a>
+        </span>
+      
+
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h5 id="HTTP协议再入门"><a href="#HTTP协议再入门" class="headerlink" title="HTTP协议再入门"></a>HTTP协议再入门</h5><p>​       在android开发中，对应用的网络访问层做了封装，让网络访问层脱离了业务，可以在不同的应用项目中重用，在这个过程中不可避免的需要接触到HTTP协议。其实以前写前端的时候也接触到了HTTP协议的使用。不得不说，前人在这方面做了大量的工作，无论是android的Retrofit+OkHTTP或者Apache的HttpClient又或者最原始的JDK自带的URLConnection，还是前端的Ajax，这些技术的出现将计算机网络协议的复杂性都很好的隐藏在了它们自身的内部，使得外部的使用者不用关心庞大复杂的计算机网络的体系，只用使用者处理应用层的HTTP请求即可，这对开发的过程提供了极大的便利。</p>
+<p>​    但同时，从学习的角度来说，由于封装的原因，在开发的过程中，我始终没有办法将代码和计算机网络的知识很好进行联系在一起。但出现需要自定义协议等特殊情况的时候，就显得比较棘手了。所以我觉得需要对整个过程进行一次梳理，以期能够对理论和实际的进行进一步的结合，提高自己对理论知识的理解。</p>
+<p>​       首先我列举出我在开发中对和以前的学习中感到疑惑的问题，希望可以在后面的分析中得到解答。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">整一个完整的HTTP请求的过程是怎么样的</span><br><span class="line">在编程中HTTP请求是怎么完成的，哪部分封装了这个逻辑过程</span><br><span class="line">HTTP所谓的无状态特性该怎么通俗的理解</span><br><span class="line">为什么URI的格式需要定义scheme和port</span><br></pre></td></tr></table></figure>
+<hr>
+<h6 id="流程分析"><a href="#流程分析" class="headerlink" title="流程分析"></a>流程分析</h6><p>一个HTTP的事务流程就计算机网络的分层架构的完整体现。每一个层次各尽其职，保证一次数据传输的完成。</p>
+<ul>
+<li><p>HTTP请求的逻辑过程<br><img src="/image/HTTP事务流程.png" alt="HTTP事务流程"></p>
+<pre><code>注意：在HTTP/1.0规范中，是没有持久连接的，HTTP响应后就关闭TCP连接了；在HTTP/1.1中，加入了持久连接(persistent connection),TCP连接是默认不关闭的，可以被多个请求复用。
+</code></pre><p>​那么对于HTTP协议的无状态是指对于HTTP协议对于事务处理没有记忆能力，如果后一个请求需要前一次请求的消息，则必须重传。就像每次打电话的时候，都要从你好，找谁开始而不会直接切入主题。</p>
+</li>
+<li><p>HTTP请求的编程模型</p>
+</li>
+</ul>
+<p>上面的图表示的是HTTP请求的逻辑过程的模型，那么在实际编程中是怎么样来实现这一个过程的呢？开始的时候说了，前人已经帮我们做了大量的工作，所以现在我们只需要做的就是新建HTTP请求的工作了，其他的上面的库都已经帮我们在背后完成了。  </p>
+<p>大概的编程模型可以总结为：</p>
+<table>
+<thead>
+<tr>
+<th>使用层</th>
+<th>应用层</th>
+<th>运输层</th>
+<th>操作系统</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>角色：编程人员                                                           工作:只需要按照HTTP的规范，将HTTP的报文给构建出来即可</td>
+<td>角色：HTTPClient                                                                             工作：根据HTTP的报文来新建HTTP请求</td>
+<td>角色：编程接口，包括Socket，XTI/TLI                                                   工作：提供传输层实现接口，实现运输层的连接工作</td>
+<td>角色：本地调用接口(native)                                                                                                              工作：在系统层为通信进程分配端口，并进行绑定，同时监听请求和响应，并完成运输层后面的工作</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h6 id="URI"><a href="#URI" class="headerlink" title="URI"></a>URI</h6><p>再来说说URI。HTTP是用来传输资源的，那么必然就需要知道如何找到资源，就好像寄快递总要知道对方的地址，打电话总要知道对方的区号和电话号码。同样的资源的<strong>标识</strong>使用的就是URI.</p>
+<p>首先需要了解几个概念。</p>
+<ul>
+<li>IETF(<strong>Intetnet Engineering Task Force</strong>),互联网任务工程小组，负责Internet标准的开发与制定。</li>
+</ul>
+<ul>
+<li>RFC(<strong>Request For Comments</strong>)，是一系列档案式的文档，制定了关于Internet的各种文字资料和规范，是IETF标准的主干。</li>
+</ul>
+<p>URI(<strong>Uniform Resource Identifier</strong>)，是RFC中的一个规范，URI的标准规范最终版是在2005年通过的<a href="http://www.ietf.org/rfc/rfc3986" target="_blank" rel="external">RFC3986</a>。这中间的发展过程比较曲折，说老实话，我到现在还没弄清URI成为标准的整个过程。这里先挖个坑，以后再回来填。</p>
+<p>URI的出现，是为了对资源进行唯一标识。就好像地址一样，为了对地点进行唯一标识，但标识的方式可能不一样，可以用经纬度进行标识，也可以用官方规定的行政地址进行标识，但都可以进行唯一标识。反过来，URI中也分为两种标识方式，都可以对资源进行唯一标识。</p>
+<ul>
+<li>URL(<strong>Uniform Resource Locators</strong>):统一资源定位符，来对资源的位置进行定位，就好像经纬度一样，提供了查找资源的方法。比如，表明一个图片资源的在服务器上的目录地址。</li>
+<li>URN(<strong>Uniform Resource Name</strong>):统一资源名称，来对资源的进行唯一命名，就好像行政地址一样，在<strong><em>基于某个命名空间</em></strong>中通过名称定义资源的身份。比如，用于标识唯一书目的ISBN系统就是使用URN，ISBN 0-486-27557-4( <a href="urn:isbn:0-486-27557-4" target="_blank" rel="external">urn:isbn:0-486-27557-4</a> )无二义性地标识出在ISBN系统这个命名空间中莎士比亚的戏剧《罗密欧与朱丽叶》的某一特定版本。</li>
+</ul>
+<p>它们之间的关系如图(来源:维基百科):</p>
+<p><img src="/image/URI_URL_URN.png" alt="URI_URL_URN"></p>
+<p>所以，无论是查找资源的唯一位置还是定义资源的唯一名称，都可以唯一表示资源。那么对于一个URI，如果是一个唯一可以获取到资源的路径，那么就是URL；如果可以唯一命名一个资源，那么是URN，如果两者都可以，那你爱叫什么叫什么。其实最好统一叫URI，因为URL的叫法正在被废除。</p>
+<p>URI规范规定了URI的通用格式(这个得看Wiki的英文版，中文版被阉割了，下面部分翻译自Wiki，并加入部分补充)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scheme:[//[user:password@]host[:port]][/]path[?query][#fragment]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>scheme<ul>
+<li>作用：表示资源的访问方式或取得方式。</li>
+<li>组成：规范的形式是首字母是小写字母，可以接字母，数字，<code>+</code>，<code>.</code>，<code>-</code>，对于字母，尽管大小写敏感，规范的形式还是小写；schme后接<code>:</code></li>
+</ul>
+</li>
+<li>//<ul>
+<li>在某些scheme中要求，在某些scheme中不要求。当没有host部分时，就不能有</li>
+</ul>
+</li>
+<li>authority part<ul>
+<li>authention section：可选部分，由<code>用户名:密码@</code>组成。是为了对一些UNIX的远程访问文件的表示方法进行统一而引入的。</li>
+<li>host：主机名或IP地址</li>
+<li>port number：端口号，和host以<code>:</code>分割</li>
+</ul>
+</li>
+<li>path<ul>
+<li>横向形式组织，用<code>/</code>分割成多个部分；当没有authority part时，必须以<code>/</code>为首字符，也可以没有分隔符。</li>
+</ul>
+</li>
+<li>query<ul>
+<li>可选部分，和前面的部分以<code>?</code>来分割，通常是用<code>&amp;</code>或<code>;</code>做分隔符的一组key=value键值对。</li>
+</ul>
+</li>
+<li>fragment<ul>
+<li>可选部分，和前面的部分以<code>#</code>来分割，通常是指向一个资源部分的片段标识符，在<code>HTML</code>中指的是某个DOM元素的id属性。</li>
+</ul>
+</li>
+</ul>
+<p>可以参考wiki提供的例子理解</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">                    hierarchical part</span><br><span class="line">        ┌───────────────────┴─────────────────────┐</span><br><span class="line">                    authority               path</span><br><span class="line">        ┌───────────────┴───────────────┐┌───┴────┐</span><br><span class="line">  abc://username:password@example.com:123/path/data?key=value&amp;key2=value2#fragid1</span><br><span class="line">  └┬┘   └───────┬───────┘ └────┬────┘ └┬┘           └─────────┬─────────┘ └──┬──┘</span><br><span class="line">scheme  user information     host     port                  query         fragment</span><br><span class="line"></span><br><span class="line">  urn:example:mammal:monotreme:echidna</span><br><span class="line">  └┬┘ └──────────────┬───────────────┘</span><br><span class="line">scheme              path</span><br></pre></td></tr></table></figure>
+<p>这里顺便再简单了解一下资源的类型。由于由超文本变成了超媒体，所以需要对资源进行类型的分类。根据资源类型，通信双方来判断如何处理数据。</p>
+<p>HTTP协议借鉴了电子邮件系统的设计，采用MIME(Multipurpose Mail Extension)来对资源进行分类。格式是<code>父类型/子类型</code>。类型的定义同样是在IETF的RCF中制定了相应的规范。</p>
+<hr>
+<h5 id="HTTP演进"><a href="#HTTP演进" class="headerlink" title="HTTP演进"></a>HTTP演进</h5><ul>
+<li>HTTP/0.9<ul>
+<li>原型协议；只支持<code>GET</code>方法；不支持<code>MIMIE</code>和<code>Header</code></li>
+</ul>
+</li>
+<li>HTTP/1.0<ul>
+<li>支持多媒体；增加<code>POST</code>和<code>HEAD</code>方法；加入<code>Header</code>(必须是ASCII编码格式)</li>
+</ul>
+</li>
+<li>HTTP/1.1<ul>
+<li>现在使用最多的版本；增加<code>PUT</code>、<code>PATCH</code>、<code>HEAD</code>、 <code>OPTIONS</code>、<code>DELETE</code>方法；引入持久连接，管道，分段，分块；</li>
+</ul>
+</li>
+<li>SPDY<ul>
+<li>google自定义的协议</li>
+</ul>
+</li>
+<li>HTTP/2<ul>
+<li>基于SPDY，与2015年发布；二进制协议，头信息和数据体都是二进制</li>
+</ul>
+</li>
+</ul>
+<p>这里就不做展开了，详细的情况可以看阮一峰的<a href="http://www.ruanyifeng.com/blog/2016/08/http.html" target="_blank" rel="external">HTTP 协议入门</a>。</p>
+<hr>
+<h5 id="HTTP报文"><a href="#HTTP报文" class="headerlink" title="HTTP报文"></a>HTTP报文</h5><p>这一部分的内容是相当的多，看看RCF的内容就知道了<a href="https://www.w3.org/Protocols/rfc2616/rfc2616.html" target="_blank" rel="external">HTTP/1.1</a>。所以我觉得把所有内容列出来逐个记录不现实，最好的还是把握住整个协议的设计思路和架构，对每个部分可以建立索引，需要的时候再去查找，这样效果可能更好。这里讨论的是<strong>HTTP/1.1</strong>.</p>
+<ul>
+<li><p>HTTP消息(报文)格式</p>
+<p>请求消息和响应消息的结构大致相同，只是在内容上有区别。除了消息体，其他的消息部分都是纯文本，用ASCII进行编码。</p>
+<ul>
+<li>请求行/状态行+<code>&lt;CR&gt;&lt;LF&gt; || \r\n</code></li>
+<li>请求头部/响应头部+<code>&lt;CR&gt;&lt;LF&gt; || \r\n</code></li>
+<li>空行(只能是<code>&lt;CR&gt;&lt;LF&gt; || \r\n</code>，不能有空格)</li>
+<li><p>可选消息体</p>
+<p><img src="D:\06_codes\blog\spmonk.github.io\source\image\HTTP报文结构.png" alt="HTTP报文结构"></p>
+</li>
+</ul>
+<p>note：在请求头部中除了<code>Host</code>是必须的外，其他的都是可选的。</p>
+</li>
+<li><p>Request Metoods</p>
+<p>HTTP提供了八种标准的方法,区分大小写。</p>
+<ul>
+<li><code>GET</code>：请求资源，对应资源的查</li>
+<li><code>POST</code>：提交资源，对应资源的增(如果已有则为改)</li>
+<li><code>PUT</code>：更新资源，对应资源的改</li>
+<li><code>DELETE</code>：删除资源，对应资源的删</li>
+<li><code>OPTIONS</code>：查询服务器支持的方法，在URI部分使用<code>*</code>代替</li>
+<li><code>HEAD</code>：请求资源，但返回的是资源的消息，对应资源元信息的查询。</li>
+<li><code>TRACE</code>：回显服务器收到的请求，主要用于测试或诊断</li>
+<li><code>CONNECT</code>：预留扩展，用作代理</li>
+</ul>
+<p>详细方法的定义可以查看RCF关于方法的规范<a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9" target="_blank" rel="external">Method Definitions</a></p>
+</li>
+</ul>
+<ul>
+<li><p>Status Codes</p>
+<p>HTTP的响应状态码分为五组，来更好地解释请求和响应。</p>
+<ul>
+<li>1XX：信息状态码，表明服务端接收了客户端请求，客户端继续发送请求</li>
+<li>2XX：成功状态码，表明客户端发送的请求被服务端成功接收并成功进行了处理</li>
+<li>3XX：重定向状态码，表明客户端给客户端返回用于重定向地消息</li>
+<li>4XX：客户端错误状态码，表明客户端地请求出错</li>
+<li>5XX：服务端错误状态码，表明服务端处理请求出错</li>
+</ul>
+<p>具体地状态码的定义可以查看RCF关于状态码的规范<a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10" target="_blank" rel="external">Status Code Definitions</a>。</p>
+</li>
+<li><p>HTTP Headers</p>
+<p>HTTP的Headers可以分为四种类型，用来再请求和响应中传递额外的信息。</p>
+<ul>
+<li><p>General Headers：在请求和响应中都要应用到的但和在可选消息体(Message body)中的数据没有关系的Headers。</p>
+<ul>
+<li>Cache -Control</li>
+<li>Connection</li>
+<li>Date</li>
+<li>Pargma</li>
+<li>Trailer</li>
+<li>Transfer-Encoding</li>
+<li>Upgrade</li>
+<li>Via</li>
+</ul>
+</li>
+<li><p>Entity Headers：关于Message body中实体的信息，比如长度，类型</p>
+<ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Content-Encoding</span><br><span class="line">Content-Language</span><br><span class="line">Content-Length</span><br><span class="line">Content-Location</span><br><span class="line">Content-Range</span><br><span class="line">Content-Type</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Expires：数据的过期时间</p>
+</li>
+<li><p>Last-Modified：数据的最后修改时间</p>
+</li>
+</ul>
+</li>
+<li><p>Request Headers：关于获取资源或客户端自身信息的Headers</p>
+<ul>
+<li><p>Accpet</p>
+</li>
+<li><p>Accpet-Encoding</p>
+</li>
+<li><p>Accept-Language</p>
+</li>
+<li><p>Authoriaztion</p>
+</li>
+<li><p>Expect</p>
+</li>
+<li><p>From</p>
+</li>
+<li><p>Host</p>
+</li>
+<li><p>Referer</p>
+</li>
+<li><p>User-Agent</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">If-Match</span><br><span class="line">If-Modified-Since</span><br><span class="line">If-None-Match</span><br><span class="line">If-Range</span><br><span class="line">If-Unmodified-Since</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Max-Forwards</p>
+</li>
+<li><p>Proxy-Authorization</p>
+</li>
+<li><p>Range</p>
+</li>
+<li><p>TE</p>
+</li>
+</ul>
+</li>
+<li><p>Response Headers：关于响应或服务端信息的Headers</p>
+<ul>
+<li>Accept-Ranges</li>
+<li>Age：server生产响应消息到现在的时长</li>
+<li>ETag：对数据进行MD5 hash计算的结果，用来检测数据是否更改</li>
+<li>Location：被重定向的URI</li>
+<li>Proxy-Authenticate</li>
+<li>Retry-After</li>
+<li>Sever：服务器标识名称</li>
+<li>Vary</li>
+<li>WWW-Authenticate</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>以上就是HTTP规范中对于HTTP报文格式的规范的大致内容。在实际的开发中，我们需要做的就是根据实际情况，将我们的HTTP请求按照HTTP报文格式进行组装。剩下的工作一般交给了HTTP的请求框架去。当然，如果需要一些额外的功能，就需要对框架进行扩展了。再进一步，当框架不能满足需求(其实一般不会出现，出现了可能就说明HTTP协议已经不满足需求了)，这时候就要自定义协议的。就像用于流媒体，对实时性要求比较高时，所以就出现了像<code>RTMP</code>等这样的应用层协议了。</p>
+<p>HTTP的再入门就到这里，接下来还需要进一步深入的点有以下几个方面：</p>
+<h5 id="HTTP进阶"><a href="#HTTP进阶" class="headerlink" title="HTTP进阶"></a>HTTP进阶</h5><ul>
+<li>验证</li>
+<li>缓存</li>
+<li>cookie</li>
+<li>seesion</li>
+<li>加密</li>
+<li>压缩</li>
+<li>长连接   </li>
+</ul>
+<h5 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h5><ul>
+<li><a href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier" target="_blank" rel="external">WIKI:Uniform Resource Identifier</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol" target="_blank" rel="external">WIKI:Hypertext Transfer Protocol</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2016/08/http.html" target="_blank" rel="external">HTTP 协议入门</a></li>
+<li><a href="https://www.w3.org/Protocols/rfc2616/rfc2616.html" target="_blank" rel="external">Hypertext Transfer Protocol – HTTP/1.1</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP" target="_blank" rel="external">mozilla HTTP Doc</a></li>
+<li><a href="https://code.tutsplus.com/tutorials/http-the-protocol-every-web-developer-must-know-part-1--net-31177?spm=5176.100239.blogcont5892.3.ZFVL5b" target="_blank" rel="external">HTTP: The Protocol Every Web Developer Must Know - Part 1</a></li>
+</ul>
+
+    
+  </div>
+</article>
+
+</div>
+
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">Close</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'http://yoursite.com/2016/10/08/HTTP协议再入门/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//forsigner.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
