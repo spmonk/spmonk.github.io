@@ -15,16 +15,43 @@
     <meta name="keywords" content="android,Recyclerview," />
   
 
-  <meta name="description">
+  <meta name="description" content="Base Concept
+Adapter：负责提供视图来展示数据
+
+Position：在Adapter中数据项的位置
+
+Index：附加子视图的索引，用于调用getChildAt(int)
+
+Binding：准备子视图来展示adapter中对于位置的数据的过程
+
+Recycle view：一个先前被用来展示adapter中特定位置的数据的view，被放入了cache中，以便后面再次展示同一类型的数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Things of Android Recyclerview">
 <meta property="og:url" content="http://yoursite.com/2016/11/07/Things of Android Recyclerview/index.html">
 <meta property="og:site_name" content="Spmonk's site">
-<meta property="og:description">
-<meta property="og:updated_time" content="2016-11-07T14:53:15.569Z">
+<meta property="og:description" content="Base Concept
+Adapter：负责提供视图来展示数据
+
+Position：在Adapter中数据项的位置
+
+Index：附加子视图的索引，用于调用getChildAt(int)
+
+Binding：准备子视图来展示adapter中对于位置的数据的过程
+
+Recycle view：一个先前被用来展示adapter中特定位置的数据的view，被放入了cache中，以便后面再次展示同一类型的数">
+<meta property="og:updated_time" content="2016-11-07T15:50:20.438Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Things of Android Recyclerview">
-<meta name="twitter:description">
+<meta name="twitter:description" content="Base Concept
+Adapter：负责提供视图来展示数据
+
+Position：在Adapter中数据项的位置
+
+Index：附加子视图的索引，用于调用getChildAt(int)
+
+Binding：准备子视图来展示adapter中对于位置的数据的过程
+
+Recycle view：一个先前被用来展示adapter中特定位置的数据的view，被放入了cache中，以便后面再次展示同一类型的数">
 
   
 
@@ -119,6 +146,11 @@
 </div>
 
 
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#Base-Concept"><span class="toc-text">Base Concept</span></a></li></ol>
+  </div>
+
 
 
 <div class="content content-post CENTER">
@@ -159,7 +191,34 @@
 
   <div class="article-content">
     
-      
+      <h5 id="Base-Concept"><a href="#Base-Concept" class="headerlink" title="Base Concept"></a>Base Concept</h5><ul>
+<li><p>Adapter：负责提供视图来展示数据</p>
+</li>
+<li><p>Position：在Adapter中数据项的位置</p>
+</li>
+<li><p>Index：附加子视图的索引，用于调用<code>getChildAt(int)</code></p>
+</li>
+<li><p>Binding：准备子视图来展示adapter中对于位置的数据的过程</p>
+</li>
+<li><p>Recycle view：一个先前被用来展示adapter中特定位置的数据的view，被放入了cache中，以便后面再次展示同一类型的数据。这样可以通过避免初始化布局的填充和构造而显著的改善性能。</p>
+</li>
+<li><p>Scrap view：在布局期间暂时进入分离状态的子视图。Scrap view可能被重用，没有被从RecyclerView中完全分离，也有可能没有要求重新binding而不会发生改变，也有可能被认为是dirty而被adapter修改。</p>
+</li>
+<li><p>Dirty view：在展示之前必须被adapter重新binding的子视图。</p>
+</li>
+<li><p>Positions in RecyclerView</p>
+<p>RecyclerView在RecyclerView.Adapter和RecyclerView.LayoutManager间引入了新的抽象，来在布局计算期间能够检测到数据集批量的改变。这使得LayoutManager从追踪adapter数据改变来计算动画中脱离出来。这也使得性能得到改善，因为所有的view binding在同时发生，避免不必要的binding。</p>
+<p>由于这个原因，在RecyclerView中有两种position相关的方法：</p>
+<ul>
+<li>layout position：item在最新布局计算中的位置。是从LayoutManager视角的位置</li>
+<li>adapter position：item在adapter中的位置。是从Adapter视角的位置</li>
+</ul>
+<p>返回或接收layout position的方法，使用position作为最新布局计算的位置。这些positions包含了所有的变化直到最新的布局计算。这些positions和用户在屏幕上看到是一致的。</p>
+<p>另一种类型的position的相关方法是以*AdapterPosition的形式。你应该使用这些方法当你需要在最新的adapter position上做工作，尽管它们还没被显示到布局上。必须注意，这些方法在notifyDataSetChange被调用，新的布局还没计算出来的话将无法计算出adapter position，因为这个原因必须仔细处理从这些方法中返回的NO_POSITION或null结果。</p>
+<p>当写LayoutManager时，基本上使用layout position；而在写RecyclerView时基本上使用adapter position</p>
+</li>
+</ul>
+
     
   </div>
 </article>
@@ -179,7 +238,7 @@
   <span id="cover" class="cover hide"></span>
   <div id="modal-dialog" class="modal-dialog hide-dialog">
     <div class="modal-header">
-      <span id="close" class="btn-close">Close</span>
+      <span id="close" class="btn-close">关闭</span>
     </div>
     <hr>
     <div class="modal-body">

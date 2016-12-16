@@ -15,25 +15,48 @@
     <meta name="keywords" content="android,Graphics," />
   
 
-  <meta name="description" content="计算机图像学基础图像显示基本原理RGB颜色系统坐标系Android Graphics架构基本要素(basic principles)
-Bitmap
-Canvas
-Drawable">
+  <meta name="description" content="计算机图像学基础概述计算机图形学：
+ 
+OpenGL：SGI开发的跨平台图形编程工具，是图形硬件的软件接口，是相对底层的三维图形接口。
+OpenGL ES：OpenGL子集，针对嵌入式系统。
+WebGL：OpenGL ES子集，针对浏览器
+图像显示基本原理主流显示技术：光栅图形显示
+组成结构：
+
+光栅显示器
+光栅|Raster：一组相互水平的水平扫描线
+水平扫描线：一组大小一致的显示单元组成的显示">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android Graphics">
 <meta property="og:url" content="http://yoursite.com/2016/10/30/Android Graphics/index.html">
 <meta property="og:site_name" content="Spmonk's site">
-<meta property="og:description" content="计算机图像学基础图像显示基本原理RGB颜色系统坐标系Android Graphics架构基本要素(basic principles)
-Bitmap
-Canvas
-Drawable">
-<meta property="og:updated_time" content="2016-10-30T08:37:17.862Z">
+<meta property="og:description" content="计算机图像学基础概述计算机图形学：
+ 
+OpenGL：SGI开发的跨平台图形编程工具，是图形硬件的软件接口，是相对底层的三维图形接口。
+OpenGL ES：OpenGL子集，针对嵌入式系统。
+WebGL：OpenGL ES子集，针对浏览器
+图像显示基本原理主流显示技术：光栅图形显示
+组成结构：
+
+光栅显示器
+光栅|Raster：一组相互水平的水平扫描线
+水平扫描线：一组大小一致的显示单元组成的显示">
+<meta property="og:image" content="http://yoursite.com/E:\codes\blog\spmonk.github.io\source\image\计算机图形学.png">
+<meta property="og:updated_time" content="2016-11-12T12:20:59.009Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android Graphics">
-<meta name="twitter:description" content="计算机图像学基础图像显示基本原理RGB颜色系统坐标系Android Graphics架构基本要素(basic principles)
-Bitmap
-Canvas
-Drawable">
+<meta name="twitter:description" content="计算机图像学基础概述计算机图形学：
+ 
+OpenGL：SGI开发的跨平台图形编程工具，是图形硬件的软件接口，是相对底层的三维图形接口。
+OpenGL ES：OpenGL子集，针对嵌入式系统。
+WebGL：OpenGL ES子集，针对浏览器
+图像显示基本原理主流显示技术：光栅图形显示
+组成结构：
+
+光栅显示器
+光栅|Raster：一组相互水平的水平扫描线
+水平扫描线：一组大小一致的显示单元组成的显示">
+<meta name="twitter:image" content="http://yoursite.com/E:\codes\blog\spmonk.github.io\source\image\计算机图形学.png">
 
   
 
@@ -129,8 +152,8 @@ Drawable">
 
 
   <div id="toc" class="toc-article">
-    <strong class="toc-title">Posts List</strong>
-    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#计算机图像学基础"><span class="toc-text">计算机图像学基础</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#图像显示基本原理"><span class="toc-text">图像显示基本原理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#RGB颜色系统"><span class="toc-text">RGB颜色系统</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#坐标系"><span class="toc-text">坐标系</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Android-Graphics架构"><span class="toc-text">Android Graphics架构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#基本要素-basic-principles"><span class="toc-text">基本要素(basic principles)</span></a></li></ol></li></ol>
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#计算机图像学基础"><span class="toc-text">计算机图像学基础</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#图像显示基本原理"><span class="toc-text">图像显示基本原理</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#RGB颜色系统"><span class="toc-text">RGB颜色系统</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#坐标系"><span class="toc-text">坐标系</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Android-Graphics架构"><span class="toc-text">Android Graphics架构</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#基本概览"><span class="toc-text">基本概览</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#基本要素-basic-principles"><span class="toc-text">基本要素(basic principles)</span></a></li></ol></li></ol>
   </div>
 
 
@@ -173,7 +196,35 @@ Drawable">
 
   <div class="article-content">
     
-      <h4 id="计算机图像学基础"><a href="#计算机图像学基础" class="headerlink" title="计算机图像学基础"></a>计算机图像学基础</h4><h5 id="图像显示基本原理"><a href="#图像显示基本原理" class="headerlink" title="图像显示基本原理"></a>图像显示基本原理</h5><h5 id="RGB颜色系统"><a href="#RGB颜色系统" class="headerlink" title="RGB颜色系统"></a>RGB颜色系统</h5><h5 id="坐标系"><a href="#坐标系" class="headerlink" title="坐标系"></a>坐标系</h5><h4 id="Android-Graphics架构"><a href="#Android-Graphics架构" class="headerlink" title="Android Graphics架构"></a>Android Graphics架构</h4><h5 id="基本要素-basic-principles"><a href="#基本要素-basic-principles" class="headerlink" title="基本要素(basic principles)"></a>基本要素(basic principles)</h5><ul>
+      <h4 id="计算机图像学基础"><a href="#计算机图像学基础" class="headerlink" title="计算机图像学基础"></a>计算机图像学基础</h4><h6 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h6><p>计算机图形学：</p>
+<p> <img src="E:\codes\blog\spmonk.github.io\source\image\计算机图形学.png" alt="计算机图形学"></p>
+<p><code>OpenGL</code>：SGI开发的跨平台图形编程工具，是图形硬件的软件接口，是相对底层的三维图形接口。</p>
+<p><code>OpenGL ES</code>：OpenGL子集，针对嵌入式系统。</p>
+<p><code>WebGL</code>：OpenGL ES子集，针对浏览器</p>
+<h6 id="图像显示基本原理"><a href="#图像显示基本原理" class="headerlink" title="图像显示基本原理"></a>图像显示基本原理</h6><p>主流显示技术：<code>光栅图形显示</code></p>
+<p>组成结构：</p>
+<ul>
+<li>光栅显示器<ul>
+<li><code>光栅|Raster</code>：一组相互水平的水平扫描线<ul>
+<li>水平扫描线：一组大小一致的显示单元组成的显示序列<ul>
+<li>显示单元|像素：显示颜色和灰度</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>=&gt;显示器上的图形是像素几何，光栅存储了屏幕的像素矩阵</li>
+</ul>
+<p>显示流程：</p>
+<h6 id="RGB颜色系统"><a href="#RGB颜色系统" class="headerlink" title="RGB颜色系统"></a>RGB颜色系统</h6><h6 id="坐标系"><a href="#坐标系" class="headerlink" title="坐标系"></a>坐标系</h6><h4 id="Android-Graphics架构"><a href="#Android-Graphics架构" class="headerlink" title="Android Graphics架构"></a>Android Graphics架构</h4><h6 id="基本概览"><a href="#基本概览" class="headerlink" title="基本概览"></a>基本概览</h6><p>应用开发者通过两种方式将图片画在屏幕上：</p>
+<ul>
+<li>Canvas</li>
+<li>OpenGL</li>
+</ul>
+<p><code>android.graphics.Canvas</code>是在开发者中最流行的2D图形API。Canvas操作绘制所有的自带的和自定义的View。Canvas APIS硬件加速的实现是通过一个叫<code>OpenGLRenderer</code>的绘制类库来将Canvas操作转换为OpenGL操作，使得这些操作可以通过GPU来执行。从Andoroid4.0开始，默认开启Canvas的硬件加速。因此，对于Android4.0和之后的设备的GPU强制要求支持OpenGL ES 2.0。</p>
+<p>除了Canvas，另一个渲染图形的主要方式是使用OpenGL直接在surface上直接渲染。Android在<code>android.opengl</code>包中提供了OpenGL ES接口，开发者可以通过SDK来调用GL实现或者是通过Android NDK提供的本地 APIs.</p>
+<h5 id="基本要素-basic-principles"><a href="#基本要素-basic-principles" class="headerlink" title="基本要素(basic principles)"></a>基本要素(basic principles)</h5><ul>
 <li>Bitmap</li>
 <li>Canvas</li>
 <li>Drawable</li>
@@ -198,7 +249,7 @@ Drawable">
   <span id="cover" class="cover hide"></span>
   <div id="modal-dialog" class="modal-dialog hide-dialog">
     <div class="modal-header">
-      <span id="close" class="btn-close">Close</span>
+      <span id="close" class="btn-close">关闭</span>
     </div>
     <hr>
     <div class="modal-body">
