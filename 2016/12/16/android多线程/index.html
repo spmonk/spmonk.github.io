@@ -15,16 +15,19 @@
     <meta name="keywords" content="android,thread," />
   
 
-  <meta name="description">
+  <meta name="description" content="最近有机会对android中多线程的机制进行稍微深入一点的学习，加深了对其中一些概念和用法的理解，同时也力解了一些以前不明所以的知识。比如以前，对于进程和线程在概念上是飘忽的，感觉到这两个是个很虚无缥缈的概念，特别是在刚上操作系统课的时候，就有种看不见摸不着的感觉。不得不说，当时对这些刚接触，抽象概念也不强，确实很容易就钻了牛角尖。所以以此记录，仅作参考。
+process and thread首先">
 <meta property="og:type" content="article">
 <meta property="og:title" content="android多线程">
 <meta property="og:url" content="http://yoursite.com/2016/12/16/android多线程/index.html">
 <meta property="og:site_name" content="Spmonk's site">
-<meta property="og:description">
-<meta property="og:updated_time" content="2016-12-16T15:49:10.904Z">
+<meta property="og:description" content="最近有机会对android中多线程的机制进行稍微深入一点的学习，加深了对其中一些概念和用法的理解，同时也力解了一些以前不明所以的知识。比如以前，对于进程和线程在概念上是飘忽的，感觉到这两个是个很虚无缥缈的概念，特别是在刚上操作系统课的时候，就有种看不见摸不着的感觉。不得不说，当时对这些刚接触，抽象概念也不强，确实很容易就钻了牛角尖。所以以此记录，仅作参考。
+process and thread首先">
+<meta property="og:updated_time" content="2016-12-18T08:31:13.366Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="android多线程">
-<meta name="twitter:description">
+<meta name="twitter:description" content="最近有机会对android中多线程的机制进行稍微深入一点的学习，加深了对其中一些概念和用法的理解，同时也力解了一些以前不明所以的知识。比如以前，对于进程和线程在概念上是飘忽的，感觉到这两个是个很虚无缥缈的概念，特别是在刚上操作系统课的时候，就有种看不见摸不着的感觉。不得不说，当时对这些刚接触，抽象概念也不强，确实很容易就钻了牛角尖。所以以此记录，仅作参考。
+process and thread首先">
 
   
 
@@ -119,6 +122,11 @@
 </div>
 
 
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">Posts List</strong>
+    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#process-and-thread"><span class="toc-text">process and thread</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Looper-Handler-MessageQuene"><span class="toc-text">Looper,Handler,MessageQuene</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#system-class-for-thread"><span class="toc-text">system class for thread</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#reference"><span class="toc-text">reference</span></a></li></ol></li></ol>
+  </div>
+
 
 
 <div class="content content-post CENTER">
@@ -159,7 +167,24 @@
 
   <div class="article-content">
     
-      
+      <p>最近有机会对android中多线程的机制进行稍微深入一点的学习，加深了对其中一些概念和用法的理解，同时也力解了一些以前不明所以的知识。比如以前，对于进程和线程在概念上是飘忽的，感觉到这两个是个很虚无缥缈的概念，特别是在刚上操作系统课的时候，就有种看不见摸不着的感觉。不得不说，当时对这些刚接触，抽象概念也不强，确实很容易就钻了牛角尖。所以以此记录，仅作参考。</p>
+<h5 id="process-and-thread"><a href="#process-and-thread" class="headerlink" title="process and thread"></a>process and thread</h5><p>首先，需要说的是进程和线程的概念和对应代码上的实现。</p>
+<h5 id="Looper-Handler-MessageQuene"><a href="#Looper-Handler-MessageQuene" class="headerlink" title="Looper,Handler,MessageQuene"></a>Looper,Handler,MessageQuene</h5><ul>
+<li>MessageQuene</li>
+<li>Looper</li>
+<li>Handler</li>
+</ul>
+<h5 id="system-class-for-thread"><a href="#system-class-for-thread" class="headerlink" title="system class for thread"></a>system class for thread</h5><ul>
+<li>HandlerThread</li>
+<li>AsyncTask</li>
+<li>IntentService</li>
+</ul>
+<h6 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h6><ul>
+<li><a href="https://developer.android.com/guide/components/processes-and-threads.html" target="_blank" rel="external">Processes and Threads</a></li>
+<li><a href="http://hukai.me/android-performance-patterns-season-5/" target="_blank" rel="external">Android性能优化典范 - 第5季</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html" target="_blank" rel="external">进程与线程的一个简单解释</a></li>
+</ul>
+
     
   </div>
 </article>
@@ -179,7 +204,7 @@
   <span id="cover" class="cover hide"></span>
   <div id="modal-dialog" class="modal-dialog hide-dialog">
     <div class="modal-header">
-      <span id="close" class="btn-close">关闭</span>
+      <span id="close" class="btn-close">Close</span>
     </div>
     <hr>
     <div class="modal-body">
