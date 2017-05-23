@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Shell Code Points List | Spmonk&#39;s site</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="linux,shell," />
+  
+
+  <meta name="description" content="Concept
+符号
+单引号：’’
+双引号：””
+花括号：{}
+反括号：``
+双括号：(())
+$
+#
+*
+\
+$?：表示保留上一个命令的执行结果
+$0：函数名 
+$1：函数的第一个参数
+回车/分号：作为一行命令结束的标志。
+管道(|),逻辑与(&amp;amp;&amp;amp;),逻辑或(||)：连接命令的特殊字符
+
+
+变量
+定义变量
+
+
+数组
+运算符
+算数运算符
+关系运算符
+大于：-lt
+小于：-gt
+等于">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shell Code Points List">
+<meta property="og:url" content="http://yoursite.com/2017/05/23/Shell Code Points List/index.html">
+<meta property="og:site_name" content="Spmonk's site">
+<meta property="og:description" content="Concept
+符号
+单引号：’’
+双引号：””
+花括号：{}
+反括号：``
+双括号：(())
+$
+#
+*
+\
+$?：表示保留上一个命令的执行结果
+$0：函数名 
+$1：函数的第一个参数
+回车/分号：作为一行命令结束的标志。
+管道(|),逻辑与(&amp;amp;&amp;amp;),逻辑或(||)：连接命令的特殊字符
+
+
+变量
+定义变量
+
+
+数组
+运算符
+算数运算符
+关系运算符
+大于：-lt
+小于：-gt
+等于">
+<meta property="og:updated_time" content="2017-05-23T03:17:29.487Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Shell Code Points List">
+<meta name="twitter:description" content="Concept
+符号
+单引号：’’
+双引号：””
+花括号：{}
+反括号：``
+双括号：(())
+$
+#
+*
+\
+$?：表示保留上一个命令的执行结果
+$0：函数名 
+$1：函数的第一个参数
+回车/分号：作为一行命令结束的标志。
+管道(|),逻辑与(&amp;amp;&amp;amp;),逻辑或(||)：连接命令的特殊字符
+
+
+变量
+定义变量
+
+
+数组
+运算符
+算数运算符
+关系运算符
+大于：-lt
+小于：-gt
+等于">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=028c63b1" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">Posts List</strong>
+    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#Concept"><span class="toc-text">Concept</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Code-Style"><span class="toc-text">Code Style</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Key-Point"><span class="toc-text">Key Point</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Shell Code Points List" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Shell Code Points List</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.05.23</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>spmonk</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/category/linux/">linux</a>
+  </span>
+
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="http://spmonk.github.io//2017/05/23/Shell Code Points List/#disqus_thread"></a>
+        </span>
+      
+
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h5 id="Concept"><a href="#Concept" class="headerlink" title="Concept"></a>Concept</h5><ul>
+<li>符号<ul>
+<li>单引号：’’</li>
+<li>双引号：””</li>
+<li>花括号：{}</li>
+<li>反括号：``</li>
+<li>双括号：(())</li>
+<li>$</li>
+<li>#</li>
+<li>*</li>
+<li>\</li>
+<li>$?：表示保留上一个命令的执行结果</li>
+<li>$0：函数名 </li>
+<li>$1：函数的第一个参数</li>
+<li>回车/分号：作为一行命令结束的标志。</li>
+<li>管道(|),逻辑与(&amp;&amp;),逻辑或(||)：连接命令的特殊字符</li>
+</ul>
+</li>
+<li>变量<ul>
+<li>定义变量</li>
+</ul>
+</li>
+<li>数组</li>
+<li>运算符<ul>
+<li>算数运算符</li>
+<li>关系运算符<ul>
+<li>大于：-lt</li>
+<li>小于：-gt</li>
+<li>等于：-eq</li>
+<li>与：-a</li>
+<li>或：-o</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>条件判断符<ul>
+<li>​</li>
+</ul>
+</li>
+<li>函数<ul>
+<li>定义</li>
+<li>调用</li>
+<li>返回值</li>
+</ul>
+</li>
+<li>关键命令<ul>
+<li>expr</li>
+<li>read</li>
+<li>let</li>
+<li>sed</li>
+<li>grep</li>
+<li>curl</li>
+</ul>
+</li>
+</ul>
+<h5 id="Code-Style"><a href="#Code-Style" class="headerlink" title="Code Style"></a>Code Style</h5><ul>
+<li>变量<ul>
+<li>变量名大小写不限，但惯例上采用全大写的方式</li>
+<li>定义变量时，=的前后都不能有空格</li>
+</ul>
+</li>
+</ul>
+<h5 id="Key-Point"><a href="#Key-Point" class="headerlink" title="Key Point"></a>Key Point</h5><ul>
+<li><p>执行顺序</p>
+<ul>
+<li>别名：alias</li>
+<li>关键字：keyword</li>
+<li>函数：function</li>
+<li>内建命令：built in</li>
+<li>哈希索引：hash</li>
+<li>外部命令：command</li>
+</ul>
+</li>
+<li><p>正则表达式</p>
+<p>描述字符串结构模式的表达方法。正则表达式可以用/包围起来表示开始和结束。</p>
+<ul>
+<li><p>使用场景：(字符串)</p>
+<ul>
+<li>复杂字符串的搜索，替换</li>
+<li>字符串验证</li>
+</ul>
+</li>
+<li><p>元字符(metacharacter)：正则表达式中规定的特殊字符,具有特殊指代的字符</p>
+<ul>
+<li>.   ：匹配除了换行符以外的任意字符（字符）</li>
+<li><em>: </em>前面的内容可以连续重复使用任意次（数量）</li>
+<li>+: +前面的内容可以连续重复一次或多次(数量)</li>
+<li>? ：加在字符限定符后面时，表示重复0次或一次(数量)；加在其他数量匹配符后面时，表示懒惰匹配符。</li>
+<li>{n}：重复n次</li>
+<li>{n,}：重复n次或更多次</li>
+<li>{n,m}：重复n到m次</li>
+<li>\n：换行符</li>
+<li>^ ：匹配字符串的开始(位置)</li>
+<li>$ ：匹配字符串的结束(位置)</li>
+<li>\b：代表单词的开头或结尾（位置）==&gt;英文的单词是由空格，标点符号或者换行来分隔的，但是\b并不匹配这些单词分隔字符中的任何一个，它只匹配一个位置。</li>
+<li>\B：代表不是单词的开头或结尾（位置）</li>
+<li>\d：匹配一位数字(字符)</li>
+<li>\D：匹配任意一位非数字(字符)</li>
+<li>\w：匹配字母或数字或下划线(字符)</li>
+<li>\W：匹配任意不是字母，数字，下划线(字符)</li>
+<li>\s：匹配任意的空白符，包括空格，制表符(Tab),换行符，中文全角空格。(字符)</li>
+<li>\S：匹配任意非空白符。(字符)</li>
+<li>\：转义字符</li>
+<li>/ ：正则表达式的开始和结束标志。</li>
+</ul>
+</li>
+<li><p>自定义字符类别(集合)</p>
+<p>[]：在方括号中枚举出来，表示匹配方括号中的任意一个。</p>
+<p>[^]：在方括号中枚举出来，表示匹配除了方括号中的任意一个。</p>
+</li>
+<li><p>分支条件(多个条件的或)</p>
+<p>|：连接多个判断条件</p>
+</li>
+<li><p>零宽断言</p>
+<p>表示的含义是位置，确定的满足某个条件的位置。</p>
+<ul>
+<li>零宽度正预测先行断言：(?=exp)，表示的是，字符串的某个位置的后面字符串模式满足exp。</li>
+<li>零宽度正回顾后发断言：(?&lt;=exp)，表示的式，字符串的某个位置的前面字符串模式满足exp。</li>
+<li>零宽度负预测先行断言：(?!=exp)，表示的是，字符串的某个位置的后面字符串模式不满足exp。</li>
+<li>零宽度负回顾后发断言：(?&lt;!exp)，表示的式，字符串的某个位置的前面字符串模式不满足exp。</li>
+</ul>
+</li>
+<li><p>匹配规格</p>
+<ul>
+<li>懒惰／贪婪规则：默认是贪婪匹配，即匹配最多的字符；加？后，转变为懒惰匹配，匹配最少的字符。</li>
+<li>最先匹配：匹配最先匹配到的字符串。</li>
+</ul>
+</li>
+<li><p>常用的局部正则表达式</p>
+<ul>
+<li>\s+：多个空格</li>
+<li>….\b：从单词的右边开始匹配，或直观的来说，是匹配的字符串的右边是分隔符，即空格，标点符号或换行符。</li>
+</ul>
+</li>
+<li><p>正则表示式选项</p>
+<ul>
+<li>大小写选项。</li>
+<li>单行</li>
+<li>多行</li>
+<li>忽略空白</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    
+  </div>
+</article>
+
+</div>
+
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">Close</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'http://yoursite.com/2017/05/23/Shell Code Points List/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//forsigner.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

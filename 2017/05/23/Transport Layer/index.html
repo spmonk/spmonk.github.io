@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Transport Layer | Spmonk&#39;s site</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="TCP,UDP,Socket," />
+  
+
+  <meta name="description" content="概述基本服务
+进程间的数据交付
+套接字标识
+多路分解和多路复用
+
+
+差错校验
+
+额外服务
+可靠传输
+不可靠的原因
+可靠机制：重传
+
+
+面向连接
+建立连接：三次握手
+断开连接：四次挥手
+
+
+拥塞控制
+
+协议
+UDP
+TCP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Transport Layer">
+<meta property="og:url" content="http://yoursite.com/2017/05/23/Transport Layer/index.html">
+<meta property="og:site_name" content="Spmonk's site">
+<meta property="og:description" content="概述基本服务
+进程间的数据交付
+套接字标识
+多路分解和多路复用
+
+
+差错校验
+
+额外服务
+可靠传输
+不可靠的原因
+可靠机制：重传
+
+
+面向连接
+建立连接：三次握手
+断开连接：四次挥手
+
+
+拥塞控制
+
+协议
+UDP
+TCP">
+<meta property="og:updated_time" content="2017-05-23T03:18:39.143Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Transport Layer">
+<meta name="twitter:description" content="概述基本服务
+进程间的数据交付
+套接字标识
+多路分解和多路复用
+
+
+差错校验
+
+额外服务
+可靠传输
+不可靠的原因
+可靠机制：重传
+
+
+面向连接
+建立连接：三次握手
+断开连接：四次挥手
+
+
+拥塞控制
+
+协议
+UDP
+TCP">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=028c63b1" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">Posts List</strong>
+    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#基本服务"><span class="toc-text">基本服务</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#额外服务"><span class="toc-text">额外服务</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#协议"><span class="toc-text">协议</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Transport Layer" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Transport Layer</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.05.23</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>spmonk</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/category/net/">net</a>
+  </span>
+
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="http://spmonk.github.io//2017/05/23/Transport Layer/#disqus_thread"></a>
+        </span>
+      
+
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h5 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h5><h5 id="基本服务"><a href="#基本服务" class="headerlink" title="基本服务"></a>基本服务</h5><ul>
+<li>进程间的数据交付<ul>
+<li>套接字标识</li>
+<li>多路分解和多路复用</li>
+</ul>
+</li>
+<li>差错校验</li>
+</ul>
+<h5 id="额外服务"><a href="#额外服务" class="headerlink" title="额外服务"></a>额外服务</h5><ul>
+<li>可靠传输<ul>
+<li>不可靠的原因</li>
+<li>可靠机制：重传</li>
+</ul>
+</li>
+<li>面向连接<ul>
+<li>建立连接：三次握手</li>
+<li>断开连接：四次挥手</li>
+</ul>
+</li>
+<li>拥塞控制</li>
+</ul>
+<h5 id="协议"><a href="#协议" class="headerlink" title="协议"></a>协议</h5><ul>
+<li>UDP</li>
+<li>TCP</li>
+</ul>
+
+    
+  </div>
+</article>
+
+</div>
+
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">Close</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'http://yoursite.com/2017/05/23/Transport Layer/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//forsigner.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

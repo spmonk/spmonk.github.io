@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Thinking in java --- overview | Spmonk&#39;s site</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Java," />
+  
+
+  <meta name="description" content="作为整本书的开端，这章从比较高的层面全面的概括和介绍了Java语言的全貌。可以窥见，作为一门OOP的编程语言，Java的面向对象的特性体现，Java提供的完备的语言特性，以及Java的使用场景。其中穿插着和一些其他语言在横纵上的比较，对于语言的选择上也提供了建议。以下就从这几个方面总结一下这一章的内容。
+Java面向对象特性
+抽象
+所有编程语言都提供抽象机制。解决问题的复杂性取决于抽象的类型(对象">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Thinking in java --- overview">
+<meta property="og:url" content="http://yoursite.com/2017/01/07/Thinking in java --- overview/index.html">
+<meta property="og:site_name" content="Spmonk's site">
+<meta property="og:description" content="作为整本书的开端，这章从比较高的层面全面的概括和介绍了Java语言的全貌。可以窥见，作为一门OOP的编程语言，Java的面向对象的特性体现，Java提供的完备的语言特性，以及Java的使用场景。其中穿插着和一些其他语言在横纵上的比较，对于语言的选择上也提供了建议。以下就从这几个方面总结一下这一章的内容。
+Java面向对象特性
+抽象
+所有编程语言都提供抽象机制。解决问题的复杂性取决于抽象的类型(对象">
+<meta property="og:updated_time" content="2017-01-07T10:31:20.412Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Thinking in java --- overview">
+<meta name="twitter:description" content="作为整本书的开端，这章从比较高的层面全面的概括和介绍了Java语言的全貌。可以窥见，作为一门OOP的编程语言，Java的面向对象的特性体现，Java提供的完备的语言特性，以及Java的使用场景。其中穿插着和一些其他语言在横纵上的比较，对于语言的选择上也提供了建议。以下就从这几个方面总结一下这一章的内容。
+Java面向对象特性
+抽象
+所有编程语言都提供抽象机制。解决问题的复杂性取决于抽象的类型(对象">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=028c63b1" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">Posts List</strong>
+    <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#Java面向对象特性"><span class="toc-text">Java面向对象特性</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Java语言特性"><span class="toc-text">Java语言特性</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Java使用场景"><span class="toc-text">Java使用场景</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Thinking in java --- overview" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Thinking in java --- overview</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.01.07</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>spmonk</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/category/Thinking-in-java/">Thinking in java</a>
+  </span>
+
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="http://spmonk.github.io//2017/01/07/Thinking in java --- overview/#disqus_thread"></a>
+        </span>
+      
+
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>作为整本书的开端，这章从比较高的层面全面的概括和介绍了Java语言的全貌。可以窥见，作为一门OOP的编程语言，Java的面向对象的特性体现，Java提供的完备的语言特性，以及Java的使用场景。其中穿插着和一些其他语言在横纵上的比较，对于语言的选择上也提供了建议。以下就从这几个方面总结一下这一章的内容。</p>
+<h6 id="Java面向对象特性"><a href="#Java面向对象特性" class="headerlink" title="Java面向对象特性"></a>Java面向对象特性</h6><ul>
+<li><p>抽象</p>
+<p>所有编程语言都提供抽象机制。解决问题的复杂性取决于抽象的类型(对象)和质量。根据抽象的类型，可以将编程语言的抽象分为三种：</p>
+<ul>
+<li><p>基于解空间的抽象：解空间是对问题建模的地方，这里指的是计算机。即基于计算机结构的抽象。</p>
+<ul>
+<li><p>实例</p>
+<ul>
+<li>汇编语言：对底层机器的轻微抽象。</li>
+<li>命令式语言：对汇编语言的抽象。</li>
+</ul>
+</li>
+<li><p>缺点</p>
+<p>要求程序员建立解空间和问题空间上的关联，而这是困难费力的，维护成本高。 </p>
+</li>
+</ul>
+</li>
+<li><p>基于问题空间的抽象：问题空间是问题存在的地方，这里指的是业务。即基于业务结构的抽象。</p>
+<ul>
+<li><p>实例</p>
+<ul>
+<li>LISP：所有问题最终都是列表。</li>
+<li>APL：所有问题都是算法形式的。</li>
+<li>PROLOG：所有问题都可以转换成决策链。</li>
+<li>基于约束条件编程的语言和基于图形符号操作的语言。</li>
+</ul>
+</li>
+<li><p>缺点</p>
+<p>只针对待解问题建模</p>
+</li>
+</ul>
+</li>
+<li><p>面向对象方式的抽象：向编程人员提供表示问题空间中的元素的工具。即对问题空间中的元素及其在解空间中的表示的抽象，抽象的结果就是”对象”。</p>
+<ul>
+<li>对象：问题空间中的元素及其在解空间中的表示的对象+无法类比为问题空间元素的对象。</li>
+<li>本质：程序可以通过添加新类型的对象使自身适用于某个特定的问题，而不会受限于任何特定类型的问题。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>继承</p>
+<ul>
+<li>现实意义：为了解决在创建一个类后，即使另一个新类与其具有相似的功能，还是要重新创建一个新类。而继承能够以现有的类为基础，通过添加和修改来创建新类。</li>
+<li>本质：体现了类型之间的相似性,并引入父类和子类的概念来表示这样的相似性。</li>
+<li>结果：<ul>
+<li>对于某些对象的核心概念可以提取出来在父类中表示，而对于核心概念的不同实现方式可以用子类来表示。</li>
+<li>通过继承来建立了类型层次结构。同时类型层次结构也体现了类型的相似型和差异性。</li>
+<li>通过继承而产生的类型等价性。即父类和子类具有相同类型。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>多态</p>
+<ul>
+<li>现实意义：在处理类型层次结构时，基于基类进行进行编程，可以编写出不依赖于特定类型的代码，而对接会依据自身的具体类型来执行相对应的代码。这样在扩展功能而添加新类型时，不需要更改调用方法的代码，代码不受新添加类型的影响。这样可以极大改善代码的设计，同时也降低软件维护的代价。</li>
+<li>本质：动态绑定（动态派发）<ul>
+<li>静态绑定 VS 动态绑定<ul>
+<li>静态绑定：编译器在编译时，将产生对具体函数名字的调用；运行时将这个调用解析到将被执行代码的绝对地址。</li>
+<li>动态绑定：编译器在编译时，不知道将被执行的确切代码，只能确保调用方法的存在和对调用参数和返回值进行类型检查；运行时通过实际对象中存储的信息，通过一段特殊的代码来计算出方法体的地址，实现动态调用对象方法。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>结果：多态的实现，使得程序从特定类型中解放出来。而这样的实现不需要自己编写检查类型代码，编译器和Runtime会处理这些实现细节。</li>
+</ul>
+</li>
+</ul>
+<h6 id="Java语言特性"><a href="#Java语言特性" class="headerlink" title="Java语言特性"></a>Java语言特性</h6><ul>
+<li><p>单根继承</p>
+<p>在Java中所有的类最终都继承自单一的基类 — Object</p>
+<p>优点：</p>
+<ul>
+<li>单根继承结构保证所有对象都具备某些功能。</li>
+<li>单根继承结构使垃圾回收器的实现变得容易得多。</li>
+</ul>
+</li>
+<li><p>对象创建与回收</p>
+<ul>
+<li><p>对象的存储位置</p>
+<ul>
+<li><p>静态分配</p>
+<ul>
+<li><p>C++：Stack，对象存储在堆栈或静态存储区。</p>
+</li>
+<li><p>使用场景：对象的存在空间和生命周期可以在编写程序时确定。</p>
+</li>
+<li>优点：执行速度快，有利于存储空间分配和释放。</li>
+<li>缺点：缺少了灵活性，必须在编写程序时知道对象的确切数量，生命周期和类型。在一般化问题上将收到极大限制。</li>
+</ul>
+</li>
+<li><p>动态分配</p>
+<ul>
+<li>Java：Heap,在堆的内存池中动态创建对象。Java完全采用了动态内存，基本类型只是一种特例。</li>
+</ul>
+<ul>
+<li>使用场景：知道运行时才知道需要多少对象，生命周期和具体类型</li>
+<li>优点：对象创建的灵活性，对象创建可以在需要时直接在堆中创建。</li>
+<li>缺点：存储空间是在运行时被动态管理的，需要大量时间在堆中分配空间。</li>
+<li>前提：动态方式存在一般性的假设，即对象趋于变得复杂，所以查找和释放存储空间的开销不会对对象的穿件造成重大冲击。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>对象的生命周期：</p>
+<ul>
+<li>静态分配：编译器可以确定对象存活时间，并可以自动销毁。</li>
+<li>动态分配：编译器对对象的生命周期一无所知。所以Java提供了垃圾回收机制来发现对象何时不再使用，并对对象进行销毁。而C++程序必须手动编程实现，而这不可避免的容易发生错误。</li>
+</ul>
+</li>
+<li><p>容器</p>
+<p>  Java在其标准类库<code>java.util</code>中提供了大量的容器,其中有满足不同需求的各种类型的容器。</p>
+<ul>
+<li>不同容器提供了不同类型的接口和外部行为</li>
+<li>不同的容器对于某些操作具有不同效率。</li>
+</ul>
+</li>
+<li><p>泛型</p>
+<p>  在Java SE5中增加的参数化类型，符号是一对尖括号，中间参数为类型名词。</p>
+<p>  现实意义：在取回具有实用接口的对象时，需要某种方式记住对象类型，使得可以进行正确的向下转型。而这样的方案就是参数化类型机制。</p>
+<p>  本质：通过编译器可以自动定制作用于特定类型上的类。</p>
+<p>  优点：不需要向下转型和进行运行时类型检查，避免错误。</p>
+</li>
+<li><p>异常</p>
+<p>  异常处理就是于程序正常执行路径并行的，在错误发生时执行的另一条路径。</p>
+<ul>
+<li>异常处理的错呀处理直接至于编程语言中，甚至操作系统中</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>异常不能被忽略，它保证一定在某处得到处理。</li>
+<li><p>异常提供了一种从错误状况进行可靠恢复的途径。</p>
+</li>
+<li><p>并发</p>
+<p>  把问题切分成多个可独立运行的部分，提高程序的响应能力。Java的并发是内置的，在Java SE5的<code>java.util.concurrent</code>中添加了大量的并发支持。</p>
+<ul>
+<li>可独立运行的部分叫线程，使一种为单一处理器分配执行时间的手段。</li>
+<li>在语言级别上，多线程使得编程人员不再操心机器上是有多个处理其还是只有一个处理器。如果有多个处理器，线程可以被指派给不同的处理器，实现真正的并行；如果是单处理器，通过时间片的分配使得看起来好像在并行执行一样。</li>
+<li>问题：共享资源</li>
+</ul>
+</li>
+</ul>
+<h6 id="Java使用场景"><a href="#Java使用场景" class="headerlink" title="Java使用场景"></a>Java使用场景</h6><ul>
+<li>java C/S编程</li>
+</ul>
+
+    
+  </div>
+</article>
+
+</div>
+
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">Close</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'http://yoursite.com/2017/01/07/Thinking in java --- overview/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//forsigner.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
